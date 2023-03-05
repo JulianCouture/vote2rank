@@ -21,7 +21,7 @@ const Create = () => {
 
 
     const { data, error } = await supabase
-    .from('smoothies')
+    .from('items')
     .insert([{ title, method, rating}])
     .select()
 
@@ -32,7 +32,7 @@ const Create = () => {
     if (data) {
       console.log(data)
       setFormError(null)
-      // navigate('/')
+      navigate('/')
     }
   }
 
@@ -44,7 +44,7 @@ const Create = () => {
 
   return (
     <div className="page create">
-      <form onSubmit={handleQuestionSubmit}>
+      {/* <form onSubmit={handleQuestionSubmit}>
         <label htmlFor="title">Enter Question</label>
         <input
           type='text'
@@ -57,7 +57,7 @@ const Create = () => {
         <button>Enter</button>
 
         {formError && <p className="error">{formError}</p>}
-      </form>
+      </form> */}
 
       <form onSubmit={handleSubmit}>
         <label htmlFor="title">Add List Item</label>

@@ -1,15 +1,15 @@
 import { useState } from 'react'
 import supabase from '../config/supabaseClient'
 
-const VoteButton = ({ smoothie, handleVoteState }) => {
+const VoteButton = ({ item, handleVoteState }) => {
 
     
 
     // const handleDelete = async () => {
     //     const { data, error} = await supabase 
-    //         .from('smoothies')
+    //         .from('items')
     //         .delete()
-    //         .eq('id',smoothie.id)
+    //         .eq('id',item.id)
     //         .select()
 
     //     if(error) {
@@ -17,7 +17,7 @@ const VoteButton = ({ smoothie, handleVoteState }) => {
     //     }
     //     if(data) {
     //         console.log(data)
-    //         onDelete(smoothie.id)
+    //         onDelete(item.id)
     //     }
     // }
 
@@ -25,7 +25,7 @@ const VoteButton = ({ smoothie, handleVoteState }) => {
         rating++
     
         const { data, error } = await supabase
-        .from('smoothies')
+        .from('items')
         .update({rating})
         .eq('id',id)
         .select()
@@ -42,10 +42,10 @@ const VoteButton = ({ smoothie, handleVoteState }) => {
       }
 
     return (
-        <button className="smoothie-card" onClick={() => handleVote(smoothie)}>
-            <h3>{smoothie.title}</h3>
-            {/* <p>{smoothie.method}</p> */}
-        </button>
+        <div className="vote-button" onClick={() => handleVote(item)}>
+            <h3>{item.title}</h3>
+            {/* <p>{item.method}</p> */}
+        </div>
     )
 }
 

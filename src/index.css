@@ -33,14 +33,14 @@ nav h1 {
   padding: 20px;
 }
 
-/* smoothie grid */
-.smoothie-grid {
+/* item grid */
+.item-grid {
   margin-top: 40px;
   display: block;
   /* grid-template-columns: 1fr 1fr 1fr; */
   /* gap: 40px; */
 }
-.smoothie-card {
+.item-card {
   width: 100%;
   padding: 10px;
   background: #fff;
@@ -49,8 +49,38 @@ nav h1 {
   position: relative;
   margin: 7px;
   text-align: center;
+
 }
-.smoothie-card .rating {
+.vote-button {
+  display: grid;
+  place-content: center;
+  width: 100%;
+  padding: 10px;
+  background: #fff;
+  box-sizing: border-box;
+  border-radius: 6px;
+  position: relative;
+  margin: 10px;
+  text-align: center;
+
+}
+.vote-button:hover {background-color: rgb(233, 231, 231)}
+
+.vote-button:active {
+  background-color: rgb(226, 224, 224);
+  /* box-shadow: 0 5px #666; */
+  transform: translateY(2px);
+}
+
+.item-card:hover {background-color: rgb(233, 231, 231)}
+
+.item-card:active {
+  background-color: rgb(226, 224, 224);
+  /* box-shadow: 0 5px #666; */
+  transform: translateY(2px);
+}
+
+.item-card .rating {
   position: absolute;
   top: 20px;
   left: 20px;
@@ -63,10 +93,10 @@ nav h1 {
   line-height: 0px;
   text-align: center;
 }
-.smoothie-card .buttons {
+.item-card .buttons {
   text-align: right;
 }
-.smoothie-card i {
+.item-card i {
   color: #bbb;
   margin-left: 10px;
   font-size: 1.2em;
@@ -118,7 +148,7 @@ form button {
 
 
 .vote {
-  background: var(--secondary);
+  /* background: var(--secondary); */
   display: flex;
   flex-direction: row;
   align-content: center;
@@ -137,6 +167,7 @@ form button {
   height: 30vh;
   text-align: center;
   line-height: 30vh;
+  outline: none;
 }
 
 .choice2 {

@@ -2,17 +2,19 @@ import supabase from "../config/supabaseClient"
 import { useEffect, useState } from "react"
 
 // components 
-import SmoothieCard from "../components/SmoothieCard"
+import ItemCard from "../components/ItemCard"
 import VoteButton from "../components/VoteButton"
+import AddCard from "../components/AddCard"
 
 const Home = () => {
   const [fetchError, setFetchError] = useState(null)
-  const [smoothies, setSmoothies] = useState(null)
+  const [items, setitems] = useState(null)
   const [orderBy, setOrderBy] = useState('rating')
-  const [voteSmoothies, setVoteSmoothies] = useState(null)
-  const [voteState,setVoteState] =useState(0)
+  const [voteitems, setVoteitems] = useState(null)
+  const [voteState,setVoteState] = useState(0)
+  const [question,setQuestion] = useState('Which is better?')
 
-  console.log(smoothies)
+  console.log(items)
 
   
   const handleVoteState = () => {
@@ -21,71 +23,82 @@ const Home = () => {
 
 
   const handleDelete = (id) => {
-    setSmoothies(prevSmoothies => {
-      return prevSmoothies.filter(sm => sm.id !== id)
+    setitems(previtems => {
+      return previtems.filter(sm => sm.id !== id)
     })
   }
 
   useEffect(() => {
-    const fetchSmoothies = async () => {
+    const fetchitems = async () => {
       const { data, error } = await supabase
-        .from('smoothies')
+        .from('items')
         .select()
         .order(orderBy, {ascending: false})
 
         if (error) {
-          setFetchError('Could not fetch the smoothies')
-          setSmoothies(null)
+          setFetchError('Could not fetch data')
+          setitems(null)
         }
         if (data) {
-          setSmoothies(data)
+          setitems(data)
           setFetchError(null)
         }
     }
 
-    fetchSmoothies()
+    fetchitems()
     console.log(voteState)
 
   },[orderBy,voteState])
 
-  const randomSmoothie =   () => {
-    // copy array, delete smoothie after choosing random. After button click. reset randomArray
-    let rand1 = Math.floor(Math.random() * smoothies.length);
-    let rand2 = Math.floor(Math.random() * smoothies.length);
+  const randomitem =   () => {
+    // copy array, delete item after choosing random. After button click. reset randomArray
+    let rand1 = Math.floor(Math.random() * items.length);
+    let rand2 = rand1
+    // console.log(rand1,rand2)
+    while(rand2===rand1) {
+      rand2 = Math.floor(Math.random() * items.length);
+    }
+    console.log(rand1,rand2)
 
-    setVoteSmoothies = randomSmoothie()
     return [rand1,rand2]
   }
 
-
+  const random = () => randomitem()
+  console.log(random)
 
   return (
     <div className="page home">
       {fetchError && (<p>{fetchError}</p>)}
-      <h1 className="question">Which is better?</h1>
-      {smoothies && (
+      <h1 className="question">{question}</h1>
+      {items && (
         <div>
-        <div className="top">
+          {items.length > 1 && (
+            <div className="top">
+        {/* <ItemCard key={items[0].id} item={items[0]} onDelete={handleDelete}/> */}
         <div className="vote">
-          {/* <button className="choice1" onClick={() => console.log(smoothies[1].title)}>{randomSmoothie()}</button> */}
-          <VoteButton key={smoothies[0].id} smoothie={smoothies[Math.floor(Math.random() * smoothies.length)]} onDelete={handleDelete} handleVoteState={handleVoteState}/>
+          {/* <button className="choice1" onClick={() => console.log(items[1].title)}>{randomitem()}</button> */}
+          <VoteButton  item={items[randomitem()[0]]} onDelete={handleDelete} handleVoteState={handleVoteState}/>
           <div className="vs">VS</div>
-          {/* <button className="choice2">{randomSmoothie()}</button> */}
-          <VoteButton key={smoothies[1].id} smoothie={smoothies[Math.floor(Math.random() * smoothies.length)]} onDelete={handleDelete} handleVoteState={handleVoteState}/>
+          {/* <button className="choice2">{randomitem()}</button> */}
+          <VoteButton  item={items[randomitem()[1]]} onDelete={handleDelete} handleVoteState={handleVoteState}/>
         </div>
-      </div>
-        <div className="smoothies">
-          <div className="order-by">
+        </div>
+          )}
+        
+        <div className="items">
+          {/* <div className="order-by">
             <p>Order by:</p>
             <button onClick={() => setOrderBy('created_at')}>Time Created</button>
             <button onClick={() => setOrderBy('title')}>Title</button>
             <button onClick={() => setOrderBy('rating')}>Rating</button>
-          </div>
-          <div className="smoothie-grid">
-            {smoothies.map(smoothie => (
-              <SmoothieCard key={smoothie.id} smoothie={smoothie} onDelete={handleDelete}/>
+          </div> */}
+          <div className="item-grid">
+            {items.map(item => (
+              <ItemCard key={item.id} item={item} onDelete={handleDelete} two={ items.length > 2 ? false : true}/>
             ))}
+            
           </div>
+          <AddCard/>
         </div>
         </div>
       )}

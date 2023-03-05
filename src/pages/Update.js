@@ -20,7 +20,7 @@ const Update = () => {
     }
 
     const { data, error } = await supabase
-    .from('smoothies')
+    .from('items')
     .update({ title, method, rating})
     .eq('id',id)
     .select()
@@ -42,9 +42,9 @@ const Update = () => {
 
 
   useEffect(() => {
-    const fetchSmoothie = async () => {
+    const fetchitem = async () => {
       const { data, error } = await supabase
-      .from('smoothies')
+      .from('items')
       .select()
       .eq('id', id)
       .single()
@@ -60,7 +60,7 @@ const Update = () => {
       }
     }
 
-    fetchSmoothie()
+    fetchitem()
   }, [id, navigate])
 
   return (
@@ -89,7 +89,7 @@ const Update = () => {
           onChange={(e) => setRating(e.target.value)}
         />
 
-        <button>Update Smoothie Recipe</button>
+        <button>Update</button>
 
         {formError && <p className="error">{formError}</p>}
       </form>
