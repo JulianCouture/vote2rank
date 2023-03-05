@@ -98,7 +98,7 @@ const Home = () => {
             ))}
             
           </div>
-          <AddCard/>
+          {/* <AddCard handleVoteState={handleVoteState}/> */}
         </div>
         </div>
       )}
