@@ -63,8 +63,11 @@ const Home = () => {
     return [rand1,rand2]
   }
 
-  const random = () => randomitem()
-  console.log(random)
+  let random = [0,1]
+  if(items) {
+    random = randomitem()
+  }
+  // console.log(random)
 
   return (
     <div className="page home">
@@ -77,10 +80,10 @@ const Home = () => {
         {/* <ItemCard key={items[0].id} item={items[0]} onDelete={handleDelete}/> */}
         <div className="vote">
           {/* <button className="choice1" onClick={() => console.log(items[1].title)}>{randomitem()}</button> */}
-          <VoteButton  item={items[randomitem()[0]]} onDelete={handleDelete} handleVoteState={handleVoteState}/>
+          <VoteButton  item={items[random[0]]} onDelete={handleDelete} handleVoteState={handleVoteState}/>
           <div className="vs">VS</div>
           {/* <button className="choice2">{randomitem()}</button> */}
-          <VoteButton  item={items[randomitem()[1]]} onDelete={handleDelete} handleVoteState={handleVoteState}/>
+          <VoteButton  item={items[random[1]]} onDelete={handleDelete} handleVoteState={handleVoteState}/>
         </div>
         </div>
           )}
@@ -98,7 +101,7 @@ const Home = () => {
             ))}
             
           </div>
-          {/* <AddCard handleVoteState={handleVoteState}/> */}
+          <AddCard handleVoteState={handleVoteState}/>
         </div>
         </div>
       )}

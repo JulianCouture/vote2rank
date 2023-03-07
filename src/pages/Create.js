@@ -40,6 +40,7 @@ const Create = () => {
   e.preventDefault()
   console.log(question)
 
+
   }
 
   return (
@@ -58,7 +59,7 @@ const Create = () => {
 
         {formError && <p className="error">{formError}</p>}
       </form> */}
-
+      <div className='form-container'>
       <form onSubmit={handleSubmit}>
         <label htmlFor="title">Add List Item</label>
         <input
@@ -73,6 +74,7 @@ const Create = () => {
 
         {formError && <p className="error">{formError}</p>}
       </form>
+      </div>
     </div>
     
   )

@@ -3,9 +3,9 @@ import supabase from '../config/supabaseClient'
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 
-const AddCard = (handleVoteState) => {
-    handleVoteState()
-    const navigate = useNavigate()
+const AddCard = ({handleVoteState}) => {
+    
+  const navigate = useNavigate()
   const [title,setTitle] = useState('')
   const method = 0;
   const rating = 0;
@@ -14,7 +14,7 @@ const AddCard = (handleVoteState) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-
+    
     if (!title) {
       setFormError("hut")
       return
@@ -35,7 +35,7 @@ const AddCard = (handleVoteState) => {
       setFormError(null)
       navigate('/')
     }
-    handleVoteState()
+    setTitle('')
     handleVoteState()
   }
 
@@ -47,9 +47,9 @@ const AddCard = (handleVoteState) => {
 
     return (
         
-            <form className="item-card" onSubmit={handleSubmit}>
-        <label htmlFor="title"><h3>Add List Item</h3></label>
-        <input
+            <form className="item-card addcard" onSubmit={handleSubmit}>
+        <label htmlFor="title"><h3></h3></label>
+        <input className='addcardinput'
           type='text'
           id='title'
           value={title}
@@ -61,7 +61,9 @@ const AddCard = (handleVoteState) => {
 
         {formError && <p className="error">{formError}</p>}
       </form>
+      
         
+
     )
 }
 
