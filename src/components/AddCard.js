@@ -16,7 +16,7 @@ const AddCard = ({handleVoteState}) => {
     e.preventDefault()
     
     if (!title) {
-      setFormError("hut")
+      setFormError("error")
       return
     }
 
