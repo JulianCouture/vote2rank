@@ -96,8 +96,8 @@ const Home = () => {
             <button onClick={() => setOrderBy('rating')}>Rating</button>
           </div> */}
           <div className="item-grid">
-            {items.map(item => (
-              <ItemCard key={item.id} item={item} onDelete={handleDelete} two={ items.length > 2 ? false : true}/>
+            {items.map((item,index) => (
+              <ItemCard key={item.id} item={item} onDelete={handleDelete} two={ items.length > 2 ? false : true} index={index}/>
             ))}
             
           </div>

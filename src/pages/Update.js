@@ -14,14 +14,14 @@ const Update = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    if (!title || !method || !rating) {
+    if (!title || !rating) {
       setFormError("Please fill in all the fields correctly")
       return
     }
 
     const { data, error } = await supabase
     .from('items')
-    .update({ title, method, rating})
+    .update({ title, rating})
     .eq('id',id)
     .select()
 
@@ -54,7 +54,6 @@ const Update = () => {
       }
       if (data) {
         setTitle(data.title)
-        setMethod(data.method)
         setRating(data.rating)
         console.log(data)
       }
@@ -74,12 +73,7 @@ const Update = () => {
           onChange={(e) => setTitle(e.target.value)}
         />
 
-        <label htmlFor="title">Method</label>
-        <textarea
-          id='method'
-          value={method}
-          onChange={(e) => setMethod(e.target.value)}
-        />
+        
 
         <label htmlFor="title">Rating</label>
         <input

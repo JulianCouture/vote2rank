@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import supabase from '../config/supabaseClient'
 
-const ItemCard = ({ item, onDelete, two }) => {
+const ItemCard = ({ item, onDelete, two, index }) => {
 
     const handleDelete = async () => {
         // if(two == false){
@@ -39,6 +39,7 @@ const ItemCard = ({ item, onDelete, two }) => {
         <div className="item-card">
             <h3>{item.title}</h3>
             {/* <p>{item.method}</p> */}
+            {/* <div className="rating">{index+1}</div> */}
             <div className="rating">{item.rating}</div>
             <div className="buttons">
                 <Link to={'/' + item.id}>
